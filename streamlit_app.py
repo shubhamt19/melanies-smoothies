@@ -1,5 +1,5 @@
 import streamlit as st
-from snowflake.snowpark.context import get_active_session
+#from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
 
 # Set up the Streamlit title and description
@@ -14,7 +14,8 @@ title = st.text_input("Name of Smoothe")
 st.write("The name of Your Smoothe will be", title)
 
 # Get the active Snowflake session
-session = get_active_session()
+cnx=st.connection("Snowflake")
+session = cnx.session()
 
 # Query the "fruit_options" table to get the fruit names
 my_dataframe = session.table("smoothies.public.fruit_option").select(col('Fruit_name'))
